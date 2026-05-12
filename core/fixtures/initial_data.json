@@ -1,0 +1,110 @@
+[
+    {
+        "model": "core.country",
+        "pk": 1,
+        "fields": {
+            "name": "Kenya",
+            "code": "KE"
+        }
+    },
+    {
+        "model": "core.country",
+        "pk": 2,
+        "fields": {
+            "name": "Uganda",
+            "code": "UG"
+        }
+    },
+    {
+        "model": "core.country",
+        "pk": 3,
+        "fields": {
+            "name": "Tanzania",
+            "code": "TZ"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 1,
+        "fields": {
+            "name": "Clinical Psychology"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 2,
+        "fields": {
+            "name": "Counseling Psychology"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 3,
+        "fields": {
+            "name": "Psychiatry"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 4,
+        "fields": {
+            "name": "Child Psychology"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 5,
+        "fields": {
+            "name": "Marriage & Family Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 6,
+        "fields": {
+            "name": "Addiction Counseling"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 7,
+        "fields": {
+            "name": "Trauma Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 8,
+        "fields": {
+            "name": "Cognitive Behavioral Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 9,
+        "fields": {
+            "name": "Group Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 10,
+        "fields": {
+            "name": "Art Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 11,
+        "fields": {
+            "name": "Music Therapy"
+        }
+    },
+    {
+        "model": "core.specialty",
+        "pk": 12,
+        "fields": {
+            "name": "Occupational Therapy"
+        }
+    }
+]

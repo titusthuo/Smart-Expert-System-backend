@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GraphiQL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Modern GraphiQL from official CDN -->
+  <script src="https://embed.graphiql.dev/"></script>
+  <link rel="stylesheet" href="https://embed.graphiql.dev/assets/index.css" />
+
+  <style>
+    body { height: 100vh; margin: 0; overflow: hidden; }
+    #graphiql { height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="graphiql">Loading GraphiQL...</div>
+
+  <script>
+    const url = location.href;
+
+    const fetcher = GraphiQL.createFetcher({
+      url: url,
+      // Uncomment later when you set up WebSocket subscriptions:
+      // subscriptionUrl: url.replace(/^http/, 'ws'),
+    });
+
+    ReactDOM.createRoot(document.getElementById('graphiql')).render(
+      React.createElement(GraphiQL, {
+        fetcher: fetcher,
+        defaultEditorToolsVisibility: true,
+        headerEditorEnabled: true,
+        shouldPersistHeaders: true,  // Keeps your Authorization: Bearer token saved
+      })
+    );
+  </script>
+</body>
+</html>

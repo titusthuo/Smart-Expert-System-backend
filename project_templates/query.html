@@ -1,0 +1,8 @@
+query{ hello me{ id firstName lastName isActive phoneNumber email
+profilePictureUrl country } therapists{ id name county town phone whatsapp email
+photoUrl lat lng specialization bio fullBio qualifications experience
+licenseNumber price availability rating reviews createdAt } specialties{ id name
+} therapist(id: 1){ id name county town phone email specialization bio rating
+reviewsList{ id author rating date comment } } aiChatMessages{ id text
+isFromUser createdAt user{ id email firstName lastName } } countries{ id name
+code } counties{ id name country{ id name } } } }

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Expert System for Mental Health Backend • Control Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        /* Light theme */
+        --bg-start: #667eea;
+        --bg-end: #764ba2;
+        --card-bg: rgba(255, 255, 255, 0.15);
+        --card-border: rgba(255, 255, 255, 0.2);
+        --text: #ffffff;
+        --title-gradient: linear-gradient(90deg, #fff, #a0c4ff);
+        --btn-bg: white;
+        --btn-text: #3f37c9;
+      }
+
+      [data-theme="dark"] {
+        /* Dark theme */
+        --bg-start: #0f0f1e;
+        --bg-end: #1a1a2e;
+        --card-bg: rgba(255, 255, 255, 0.08);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --text: #e0e0ff;
+        --title-gradient: linear-gradient(90deg, #c0c0ff, #ffffff);
+        --btn-bg: #4361ee;
+        --btn-text: white;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        transition: background 0.6s ease;
+        position: relative;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        width: 60px;
+        height: 34px;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        transition: all 0.4s;
+      }
+
+      .theme-toggle .slider {
+        width: 26px;
+        height: 26px;
+        background: white;
+        border-radius: 50%;
+        transition: all 0.4s;
+        position: relative;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .theme-toggle i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        transition: all 0.4s;
+        opacity: 0;
+      }
+
+      .theme-toggle .fa-sun {
+        left: 8px;
+        color: #f39c12;
+      }
+      .theme-toggle .fa-moon {
+        right: 8px;
+        color: #74b9ff;
+      }
+
+      [data-theme="dark"] .theme-toggle .slider {
+        transform: translateX(26px);
+      }
+      [data-theme="dark"] .theme-toggle .fa-moon {
+        opacity: 1;
+      }
+      [data-theme="dark"] .theme-toggle .fa-sun {
+        opacity: 0;
+      }
+      .theme-toggle .fa-moon {
+        opacity: 0;
+      }
+      .theme-toggle .fa-sun {
+        opacity: 1;
+      }
+
+      /* Rest of your styles (same as before but using variables) */
+      .container {
+        text-align: center;
+        max-width: 800px;
+        animation: fadeIn 1s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: var(--title-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      p.subtitle {
+        font-size: 1.4rem;
+        opacity: 0.95;
+        margin-bottom: 4rem;
+        font-weight: 300;
+      }
+
+      .cards {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .card {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        border: 2px solid var(--card-border);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        width: 280px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        color: inherit;
+      }
+      .card:hover {
+        transform: translateY(-15px) scale(1.03);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .admin-icon {
+        color: #4cc9f0;
+      }
+      .graphql-icon {
+        color: #e535ab;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        margin: 0 0 1rem 0;
+        font-weight: 600;
+      }
+      .card p {
+        opacity: 0.9;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 2rem;
+        background: var(--btn-bg);
+        color: var(--btn-text);
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      footer {
+        margin-top: 5rem;
+        opacity: 0.8;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 2.8rem;
+        }
+        p.subtitle {
+          font-size: 1.2rem;
+        }
+        .theme-toggle {
+          top: 1rem;
+          right: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-sun"></i>
+      <i class="fas fa-moon"></i>
+      <div class="slider"></div>
+    </div>
+
+    <div class="container">
+      <h1>Smart Expert System for Mental Health Backend</h1>
+      <p class="subtitle">
+        Smart Expert System for Mental Health Support • Control Panel
+      </p>
+
+      <div class="cards">
+        <a href="/admin/" class="card">
+          <i class="fas fa-user-shield icon admin-icon"></i>
+          <h2>Django Admin</h2>
+          <p>Manage users, data, models, permissions and database content</p>
+          <span class="btn">Open Admin</span>
+        </a>
+
+        <a href="/graphql/" class="card">
+          <i class="fas fa-project-diagram icon graphql-icon"></i>
+          <h2>GraphiQL Interface</h2>
+          <p>Explore the GraphQL API, run queries and test mutations</p>
+          <span class="btn">Open GraphiQL</span>
+        </a>
+      </div>
+
+      <footer>
+        Django {{ django.get_version }} • Graphene-Django • Secure & Fast
+      </footer>
+    </div>
+
+    <script>
+      const toggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      // Load saved theme or default to light
+      if (localStorage.getItem("theme") === "dark") {
+        body.setAttribute("data-theme", "dark");
+      }
+
+      toggle.addEventListener("click", () => {
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    </script>
+  </body>
+</html>

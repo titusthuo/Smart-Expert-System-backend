@@ -11,6 +11,15 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-dev-only-key-c
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://smart-expert-system-backend.onrender.com',
+]
+
+# Allow extra trusted origins from env (e.g. custom domains later)
+_extra_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
+if _extra_csrf:
+    CSRF_TRUSTED_ORIGINS += [o.strip() for o in _extra_csrf.split(',') if o.strip()]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -137,8 +146,15 @@ BASE_URL = os.environ.get('BASE_URL', 'http://127.0.0.1:8000')
 
 # Production security hardening (only active when DEBUG=False)
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    # ⚠️  Do NOT set SECURE_SSL_REDIRECT=True on Render.
+    # Render's load balancer handles HTTPS termination, so Django never sees
+    # an HTTPS request — enabling this causes an infinite redirect loop.
+    SECURE_SSL_REDIRECT = False
+
+    # Tell Django to trust Render's X-Forwarded-Proto header instead
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SESSION_COOKIE_SECURE = True
@@ -149,7 +165,7 @@ if not DEBUG:
 
 # Django REST Password Reset Configuration
 DJANGO_REST_PASSWORDRESET = {
-    'TOKEN_EXPIRY_TIME': 30,  # in minutes
+    'TOKEN_EXPIRY_TIME': 30,
     'EMAIL_SUBJECT': 'Password Reset Request - Smart Expert Mental Health Support',
     'EMAIL_HTML_PATH': 'email/user_reset_password.html',
     'EMAIL_PLAINTEXT_PATH': 'email/user_reset_password.txt',

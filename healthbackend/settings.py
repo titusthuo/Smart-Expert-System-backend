@@ -142,7 +142,7 @@ if _mailtrap_token:
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@smarthealth.com')
 
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:8081')
-BASE_URL = os.environ.get('BASE_URL', 'http://127.0.0.1:8000')
+BASE_URL = os.environ.get('BASE_URL', 'https://smart-expert-system-backend.onrender.com')
 
 # Production security hardening (only active when DEBUG=False)
 if not DEBUG:
